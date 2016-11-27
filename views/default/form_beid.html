@@ -1,0 +1,68 @@
+{{extend 'layout.html'}}
+{{block head}}
+<style>
+</style>
+{{end}}
+<div class="container-fluid">
+  <div class="row">
+    <form id="form_beid">
+    <div class="col-md-8">
+        <div class="form-group">
+          <label for="beid_name">Name</label>
+          <input type="text" class="form-control beid_name" id="beid_name" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label for="beid_firstname">Firstname</label>
+          <input type="text" class="form-control beid_firstname" id="beid_firstname" placeholder="Firstame">
+        </div>
+        <div class="form-group">
+          <label for="beid_name">DOB</label>
+          <input type="date" class="form-control beid_dob" id="beid_dob" placeholder="DOB">
+        </div>
+        <div class="form-group">
+          <label for="beid_name">Nationality</label>
+          <input type="text" class="form-control beid_nationality" id="beid_name" placeholder="Nationality">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Check me out
+          </label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="button" class="btn btn-default">Get</button>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input type="file" id="exampleInputFile">
+        <p class="help-block">Example block-level help text here.</p>
+        <div id="photo_id">
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+function get_beid() {
+    var API_URL = '{{=URL('api','beid.json', scheme=True, host=True)}}';
+    var returnvalue;
+    $.ajax({
+      url: API_URL,
+      type: 'GET',
+      dataType: 'json',
+      contentType: 'application/json',
+      success: function (data) {
+        console.log(data.name);
+        $(#form_beid input.beid_name).val(data.name);
+        },
+      error: function () {
+        alert('Address not found!');
+        }
+    });
+}
+
+
+</script>

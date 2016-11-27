@@ -1,0 +1,18 @@
+{{extend 'layout.html'}}
+{{try:}}
+<div>Nom = {{=infos['nom']}} </div>
+<div>Prénom = {{=infos['prenoms']}} </div>
+<div>DDN = {{=infos['date_naissance']}} </div>
+<div>Carte # {{=infos['num_carte']}} </div>
+<div>NN = {{=infos['num_nat']}} </div>
+<div>Validité du {{=infos['date_debut']}} au {{=infos['date_fin']}} </div>
+<div>Sexe = {{=infos['sexe']}} </div>
+<div>Adresse = {{=infos['adresse']}} </div>
+<div>Code Postal = {{=infos['code_postal']}} </div>
+<div>Ville = {{=infos['localite']}} </div>
+<div>Nationalité = {{=infos['nationalite']}} </div>
+<div>photo status = {{=statut}}</div>
+<img src="{{=URL('static', 'phototemp.jpg')}}" alt="photo" style="width:140px;height:200px;">
+{{except:}}
+Unable to read card
+{{pass}}
