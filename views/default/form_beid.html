@@ -16,11 +16,11 @@
           <input type="text" class="form-control beid_firstname" name="beid_firstname" placeholder="Firstame">
         </div>
         <div class="form-group">
-          <label for="beid_name">DOB</label>
+          <label for="beid_dob">DOB</label>
           <input type="date" class="form-control beid_dob" name="beid_dob" placeholder="DOB">
         </div>
         <div class="form-group">
-          <label for="beid_name">Nationality</label>
+          <label for="beid_nationality">Nationality</label>
           <input type="text" class="form-control beid_nationality" name="beid_nationality" placeholder="Nationality">
         </div>
         <div class="checkbox">
@@ -29,7 +29,7 @@
           </label>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
-        <button type="button" class="btn btn-default">Get</button>
+        <button type="button" id="get_beid" class="btn btn-default">Get</button>
     </div>
     <div class="col-md-4">
       <div class="form-group">
@@ -46,6 +46,10 @@
 
 <script type="text/javascript">
 
+$('#get_beid').click(function(e){
+    get_beid();
+  });
+
 function get_beid() {
     var API_URL = '{{=URL('api','beid.json', scheme=True, host=True)}}';
     var returnvalue;
@@ -57,6 +61,10 @@ function get_beid() {
       success: function (data) {
         console.log(data.nom);
         $("#form_beid input[name='beid_name']").val(data.nom);
+        $("#form_beid input[name='beid_firstname']").val(data.prenoms);
+        $("#form_beid input[name='beid_dob']").val(data.date_naissance);
+        $("#form_beid input[name='beid_nationality']").val(data.nationalite);
+        $("#photo_id").html('<img src="data:image/png;base64,'+data.photo+'" alt="Photo ID">');
         },
       error: function () {
         alert('Address not found!');
